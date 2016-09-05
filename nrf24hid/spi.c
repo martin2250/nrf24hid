@@ -10,7 +10,7 @@
 #define IRQ_REG PINA
 #define IRQ_PIN PA0
 
-uint8_t transfer(uint8_t data)
+uint8_t spi_transfer(uint8_t data)
 {
 	USIDR = data;
 	USISR = (1<< USIOIF); //Clear the USI counter overflow flag
@@ -23,10 +23,22 @@ uint8_t transfer(uint8_t data)
 	return USIDR;
 }
 
+void spi_init()
+{
+	PORTA = 0;
+	PORTB = 0;
+
+	DDRA = _BV(PA1) | _BV(PA2);
+	DDRB = _BV(PB1) | _BV(PB2);
+
+	PORTA = _BV(PA0) | _BV(PA2);	//IRQ pullup, SS
+
+	USICR = _BV(USIWM0);
+}
+
 void ss_high() 
 {
 	SS_REG |= _BV(SS_PIN);
-
 }
 
 void ss_low()
