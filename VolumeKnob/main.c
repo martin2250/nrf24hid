@@ -121,7 +121,7 @@ int main(void)
 				{
 					prev_encoder_state = encoder_a_get();
 
-					if(encoder_a_get() ^ encoder_b_get())
+					if(!encoder_a_get() ^ encoder_b_get())
 						scroll++;
 					else
 						scroll--;
