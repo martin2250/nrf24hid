@@ -130,13 +130,13 @@ int main(void)
 			}
 		}
 
-		if((volume != 0) || (scroll != 0) || (play != 0))
+		if(((volume / 2) != 0) || ((scroll / 2) != 0) || (play != 0))
 		{
 			if(!ispoweron)
 			{
-				transmission.volume = volume;
+				transmission.volume = (volume / 2);
 				volume = 0;
-				transmission.scroll = scroll;
+				transmission.scroll = (scroll / 2);
 				scroll = 0;
 				transmission.play = play;
 				play = 0;
